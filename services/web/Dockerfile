@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:11.15.0
 
 # set working directory
 RUN mkdir /usr/src/app
