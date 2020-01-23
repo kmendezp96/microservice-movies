@@ -29,6 +29,7 @@ Check out the [blog post](http://mherman.org/blog/2017/05/11/developing-microser
 1. Fork/Clone this repo
 
 1. Download [Docker](https://docs.docker.com/docker-for-mac/install/) (if necessary)
+   For windows: (https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.exe)
 
 1. Make sure you are using a Docker version >= 17:
 
@@ -45,9 +46,9 @@ Check out the [blog post](http://mherman.org/blog/2017/05/11/developing-microser
 $ export NODE_ENV=development
 ```
 
-#### Fire up the Containers
+#### Fire up the Containers 
 
-Build the images:
+Build the images(just the first time):
 
 ```sh
 $ docker-compose build
