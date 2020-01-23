@@ -21,6 +21,7 @@ class LoginForm extends Component {
   }
   onSubmit (event) {
     event.preventDefault();
+    console.log("loginForm", this.state);
     this.props.loginUser(this.state, (errorMessage) => {
       if (errorMessage) {
         this.props.createFlashMessage(errorMessage, 'error');

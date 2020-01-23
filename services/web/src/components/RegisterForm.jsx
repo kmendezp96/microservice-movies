@@ -21,6 +21,7 @@ class RegisterForm extends Component {
   }
   onSubmit (event) {
     event.preventDefault();
+    console.log(this.state);
     this.props.registerUser(this.state, (errorMessage) => {
       if (errorMessage) {
         this.props.createFlashMessage(errorMessage, 'error');
