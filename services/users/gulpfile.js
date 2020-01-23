@@ -1,6 +1,6 @@
-let gulp = require('gulp');
-let nodemon = require('gulp-nodemon');
-let eslint = require('gulp-eslint');
+const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+const eslint = require('gulp-eslint');
 
 /*
 tasks
@@ -9,7 +9,8 @@ tasks
 gulp.task('start', () => {
   nodemon({
     script: './src/server',
-    ext: 'js, html'
+    ext: 'js html',
+    tasks: ['lint'],
   });
 });
 
@@ -24,6 +25,4 @@ gulp.task('lint', () => (
 default
  */
 
- gulp.task('default', gulp.series(gulp.parallel('start', 'lint'), async function() {
-  console.log("HTTP Server Started");
-}))
+gulp.task('default', ['start', 'lint']);
