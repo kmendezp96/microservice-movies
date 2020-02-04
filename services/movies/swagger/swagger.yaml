@@ -1,21 +1,166 @@
----
 swagger: "2.0"
 info:
-  description: "Just a simple example"
+  description: "A simple API to be tested."
   version: "1.0.0"
   title: "Movies API"
+  contact:
+    email: "kevin.mendez@endava.com"
 host: "localhost:3001"
-basePath: "/movies"
+tags:
+- name: "Users"
+  description: "Operations about user"
+- name: "Movies"
+  description: "Everything about movies"
 schemes:
-  - "http"
+- "http"
 produces:
   - "text/html"
   - "application/json"
 paths:
-  /ping:
+  /users/ping:
     get:
-      summary: Performs a sanity check
-      description: Just a test
+      tags:
+      - "Users"
+      summary: "Performs a sanity check"
+      description: "Just a test"
       responses:
         200:
-          description: just a sanity check
+          description: "The service is running"
+  /users/register:
+    post:
+      tags:
+      - "Users"
+      summary: "Register a new user"
+      description: "register a new user and returns a token session for that user."
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "json object"
+        required: true
+        schema:
+          type: "object"
+          $ref: "#/definitions/user"
+      responses:
+        200:
+          description: "the user was created successfully"
+        500:
+          description: "wrong json body, wrong parameters or duplicated user"
+  /users/login:
+    post:
+      tags:
+      - "Users"
+      summary: "login of an existing user"
+      description: "validates the user credentials andreturns a token session for that user."
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "json object"
+        required: true
+        schema:
+          type: "object"
+          $ref: "#/definitions/user"
+      responses:
+        200:
+          description: "the user was created successfully"
+        500:
+          description: "wrong json body, wrong parameters or wrong user/password"
+  /users/user:
+    get:
+      tags:
+      - "Users"
+      summary: "returns user id."
+      description: "returns the current logged user id."
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Session bearer token."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "invalid token provided"
+  /movies/ping:
+    get:
+      tags:
+      - "Movies"
+      summary: "Performs a sanity check"
+      description: "Just a test"
+      responses:
+        200:
+          description: "The service is running"
+  /movies/user:
+    get:
+      tags:
+      - "Movies"
+      summary: "get all movies by user"
+      description: "Returns all the movies in the collection of the logged user."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Session bearer token."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "invalid token"
+        400:
+          description: "no authorization header provided"
+  /movies:
+    post:
+      tags:
+      - "Movies"
+      summary: "Add a new movie to the users collection."
+      description: "Add an specific movie title to the logged user collection."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Session bearer token."
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "json object"
+        required: true
+        schema:
+          type: "object"
+          $ref: "#/definitions/movie"
+      responses:
+        200:
+          description: "successful operation"
+        500:
+          description: "Invalid json body, not valid movie"
+        400:
+          description: "not valid authorization header provided"
+
+securityDefinitions:
+  api_auth:
+    type: "oauth2"
+    authorizationUrl: "http://localhost:3000/users/login"
+    flow: "implicit"
+definitions:
+  movie:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        description: "movie title"
+  user:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        description: "unique username."
+      password:
+        type: "string"
+        description: "account password."
+externalDocs:
+  description: "Find out more about this API"
+  url: "https://github.com/kmendezp96/microservice-movies"
