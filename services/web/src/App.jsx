@@ -3,8 +3,8 @@ import { Route, Redirect, Switch, Link } from 'react-router-dom'
 import axios from 'axios'
 
 const API_URL = 'http://www.omdbapi.com/?apikey=c5a8df09&s='; // sample
-const USERS_SERVICE_URL = "http://localhost:3000";
-const MOVIES_SERVICE_URL = "http://localhost:3001";
+const USERS_SERVICE_URL = "http://ec2-54-214-52-127.us-west-2.compute.amazonaws.com:3000";
+const MOVIES_SERVICE_URL = "http://ec2-54-214-52-127.us-west-2.compute.amazonaws.com:3001";
 
 
 import './App.css';
