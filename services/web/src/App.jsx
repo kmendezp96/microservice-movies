@@ -37,17 +37,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const script = document.createElement("script");
-    script.src = "https://www.datadoghq-browser-agent.com/datadog-rum-us.js";
-    script.async = true;
-    document.body.appendChild(script);
+    const scriptDataDog = document.createElement("script");
+    scriptDataDog.src = "https://www.datadoghq-browser-agent.com/datadog-rum-us.js";
+    scriptDataDog.async = true;
+    document.body.appendChild(scriptDataDog);
 
-    const script2 = document.createElement("script");
-    script2.innerHTML = "window.DD_RUM && window.DD_RUM.init({" +
+    const scriptDataDog2 = document.createElement("script");
+    scriptDataDog2.innerHTML = "window.DD_RUM && window.DD_RUM.init({" +
       "clientToken: 'pubae8de6a9f2b4829a2cdd78eb5fbdfe94', " +
       "applicationId: '296f3b34-d813-4d07-ade2-399b2c13f2de', });"
-    script2.async = true;
-    document.body.appendChild(script2);
+    scriptDataDog2.async = true;
+    document.body.appendChild(scriptDataDog2);
   }
 
   searchMovie(term) {
