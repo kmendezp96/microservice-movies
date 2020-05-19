@@ -35,6 +35,21 @@ class App extends Component {
     this.saveMovie = this.saveMovie.bind(this)
     this.getMovies = this.getMovies.bind(this)
   }
+
+  componentDidMount() {
+    const script = document.createElement("script");
+    script.src = "https://www.datadoghq-browser-agent.com/datadog-rum-us.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    const script2 = document.createElement("script");
+    script2.innerHTML = "window.DD_RUM && window.DD_RUM.init({" +
+      "clientToken: 'pubae8de6a9f2b4829a2cdd78eb5fbdfe94', " +
+      "applicationId: '296f3b34-d813-4d07-ade2-399b2c13f2de', });"
+    script2.async = true;
+    document.body.appendChild(script2);
+  }
+
   searchMovie(term) {
     axios.get(`${API_URL}${term}`)
     .then((res) => { this.setState({ movies: res.data.Search }); })
