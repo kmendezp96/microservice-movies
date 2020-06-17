@@ -4,7 +4,8 @@
     "import"
   ],
   "rules": {
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "linebreak-style": ["error", "windows"]
   },
   "globals": {
     "it": false,
